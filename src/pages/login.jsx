@@ -4,7 +4,7 @@ import AuthLayout from '../components/Layout/AuthLayout'
 
 const Login = () => {
   return (
-    <AuthLayout title="login">
+    <AuthLayout type="login">
       <FormLogin />
     </AuthLayout>
   )

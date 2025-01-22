@@ -4,7 +4,7 @@ import FormRegister from '../components/Fragments/FormRegister'
 
 const Register = () => {
   return (
-    <AuthLayout>
+    <AuthLayout type="register">
         <FormRegister />
     </AuthLayout>
   )

@@ -1,14 +1,19 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
+import { auth } from "../../firebase/firebaseConfig";
 
 const FormLogin = () => {
  const [email, setEmail] = useState("");
+ const [username, setUsername] = useState("");
  const [password, setPassword] = useState("");
 
  const handleLogin = async (event) => {
   event.preventDefault();
   try {
-   await signInWithEmailAndPassword(auth, email, password);
+   const usercredential = await signInWithEmailAndPassword(auth, email, password);
+   const user = usercredential.user;
+   console.log("Logged in user display name:", user.displayName);
+   window.location.href = "/pages/home"
    alert("Login Succesfully!");
   } catch (error) {
    console.error("Error login: ", error);
