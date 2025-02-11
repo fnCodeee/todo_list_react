@@ -19,7 +19,6 @@ export const FormEdit = (props) => {
     });
    }
 
-
    const inputRef = useRef(null)
    useEffect(() => {
     // Fokus ke input saat komponen FormEdit muncul
@@ -33,7 +32,7 @@ export const FormEdit = (props) => {
      className="w-full rounded-xl p-2 focus:outline-none bg-white/5"
      type="text"
      placeholder=""
-     value={value[fieldName]}
+     value={value.todoTask}
      name={fieldName}
      onChange={handleChange}
      ref={inputRef}

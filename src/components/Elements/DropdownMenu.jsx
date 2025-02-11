@@ -12,7 +12,7 @@ export const DropdownMenu = (props) => {
   const {task, handleDelete, toggleEdit} = props;
 
   return (
-    <div className="top-24 w-30 text-right z-30">
+    <div className="top-24 w-full text-right z-30">
       <Menu>
         <MenuButton className="inline-flex items-center gap-2 rounded-md bg-gray-800 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-700 data-[open]:outline-white data-[focus]:outline-1 data-[focus]:bg-gray-700">
           Options
