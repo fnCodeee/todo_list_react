@@ -5,6 +5,7 @@ export const FormEdit = (props) => {
   const [value, setValue] = useState({
     [fieldName]: task[fieldName]
   });
+  const [valueBefore] = useState(task[fieldName]);
   
   const handleSubmit = (e) =>  {
     e.preventDefault();
@@ -25,14 +26,21 @@ export const FormEdit = (props) => {
     inputRef.current?.focus();
   }, []); 
 
+  const toggleCancel = id => {
+    setValue({
+      [fieldName]: task[fieldName]
+    })
+    toggleEdit(id, true)
+  }
+
  return (
-  <form className={`${className} py-5`} onSubmit={handleSubmit}>
+  <form className={`${className} mx-4 py-5 dark:text-slate-300`} onSubmit={handleSubmit}>
    <div className="mt-5 shadow-md w-full rounded-xl flex justify-between">
     <input
-     className="w-full rounded-xl p-2 focus:outline-none bg-white/5"
+     className="w-full rounded-xl p-2 focus:outline-none bg-white/5 focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50 focus:shadow-lg focus:shadow-blue-500/50"
      type="text"
      placeholder=""
-     value={value.todoTask}
+     value={value[fieldName]}
      name={fieldName}
      onChange={handleChange}
      ref={inputRef}
@@ -40,7 +48,7 @@ export const FormEdit = (props) => {
    
    </div>
    <div className="flex mt-5 justify-end w-full gap-3">
-     <button className="py-2 px-4 rounded-full bg-green-600 flex" type="submit">
+     <button className="py-2 px-4 rounded-full text-white bg-green-600 flex" type="submit">
       <svg
        xmlns="http://www.w3.org/2000/svg"
        fill="none"
@@ -54,7 +62,7 @@ export const FormEdit = (props) => {
       Update
      </button>
 
-     <button onClick={() => toggleEdit(task.id, true)} className="p-2  rounded-full bg-slate-500">
+     <button onClick={() => toggleCancel(task.id)} className="p-2  rounded-full bg-slate-500">
       <svg
        xmlns="http://www.w3.org/2000/svg"
        fill="none"

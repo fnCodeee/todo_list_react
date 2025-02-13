@@ -7,7 +7,7 @@ import { Home } from "./pages/Home";
 import { Room } from "./pages/test/Room";
 import Task from "./pages/test/Task";
 import './input.css';
-import { TodoItem } from "./pages/test/todoItem";
+import { ModalInputTask } from "./components/Elements/ModalInputTask";
 
 const App = () => {
  return (
@@ -16,7 +16,7 @@ const App = () => {
     <Route path="/" element={<LandingPages />} />
     <Route path="/test" element={<Room />} />
     <Route path="/task" element={<Task/>} />
-    <Route path="/ti" element={<TodoItem />} />
+    <Route path="/ti" element={<ModalInputTask />} />
 
     <Route path="/auth">
      <Route path="login" element={<Login />} />

@@ -10,7 +10,6 @@ const FormRegister = () => {
     email: "",
     password: "",
 })
- const [Role, setRole] = useState("petugas");
 
  const handleRegister = async (e) => {
     const { displayName, email, password } = formData;
@@ -27,17 +26,13 @@ const FormRegister = () => {
     password,
     createAt: new Date(),
    });
-   alert("Register Succesfully!");
+   alert("Register Succesfully! now go straight to the page");
+   window.location.href = "/pages/home"
    console.log(displayName)
   } catch (error) {
    console.error("Error registrasi: ", error);
    alert("Terjadi kesalahan saat registrasi.");
   }
- };
-
- const savedb = async (userid) => {
-  try {
-  } catch (error) {}
  };
 
  return (

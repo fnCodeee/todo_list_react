@@ -24,7 +24,8 @@ export const CategoryTodo = (props) => {
     <h2 className="text-lg font-semibold mb-2 px-5">Category List</h2>
 
     {/* List kategori dengan efek hover untuk menampilkan scrollbar */}
-    <ul className="bg-linear-to-t scrollbar-hidden group-hover:scrollbar-hover max-h-72 overflow-hidden hover:overflow-y-auto">
+    <ul className="bg-linear-to-t scrollbar-hidden max-h-72 overflow-hidden sm:hover:overflow-y-auto overflow-y-auto">
+
      {listCategories.map((value) =>
       value.isEdited ? (
        <FormEdit key={value.id} task={value} toggleEdit={toggleEdit} handleEdit={handleEdit} fieldName={"name"} />
@@ -39,7 +40,7 @@ export const CategoryTodo = (props) => {
          {value.name}
         </button>
         <div>
-         <DropdownMenu handleDelete={handleDelete} task={value} toggleEdit={toggleEdit} />
+         <DropdownMenu caption="Option" handleDelete={handleDelete} task={value} toggleEdit={toggleEdit} />
         </div>
        </li>
       )

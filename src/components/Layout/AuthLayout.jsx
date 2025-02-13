@@ -1,6 +1,6 @@
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase/firebaseConfig";
 
 const AuthLayout = (props) => {
@@ -12,7 +12,7 @@ const AuthLayout = (props) => {
    if (user) {
     console.log(user.displayName);
     setCurrentUser(user);
-  } else {
+   } else {
     console.log("none");
     setCurrentUser(null);
    }
@@ -22,44 +22,58 @@ const AuthLayout = (props) => {
 
  const handleLogout = async () => {
   try {
-    if (currentUser) {
-      const confirmation = window.confirm(
-        `Are you sure you want to logout, ${currentUser.displayName}?`
-      );
-      if (confirmation) {
-        await signOut(auth);
-        alert("You have been logged out.");
-      }
-    } else {
-      alert("No user is logged in.");
+   if (currentUser) {
+    const confirmation = window.confirm(`Are you sure you want to logout, ${currentUser.displayName}?`);
+    if (confirmation) {
+     await signOut(auth);
+     alert("You have been logged out.");
     }
+   } else {
+    alert("No user is logged in.");
+   }
   } catch (error) {
-    console.error("Error during logout:", error);
+   console.error("Error during logout:", error);
   }
-};
+ };
 
+ const navigate = useNavigate();
 
- 
  return (
-  <div className="w-full min-h-screen md:grid md:grid-cols-2 flex-col p-5 h-auto">
-   <div className="w-full sm:col-start-2 sm:col-end-2 md:grid md:grid-cols-4">
-    <div className="w-full h-full col-start-2 sm:col-end-5 xl:col-end-4 flex-col justify-center items-center">
-     <h1 className="text-2xl md:text-4xl">{type === "login" ? "Hello Friend" : "Welcome"}</h1>
-     <p className="text-md  text-slate-600 sm:mt-4">
+  <div className="w-full dark:bg-[#0b192c] min-h-screen justify-center md:grid md:grid-cols-3 flex-col py-4 px-4 h-auto">
+   <div className="w-full col-span-2 md:grid md:grid-cols-2">
+    <div className="col-span-1">
+     <button onClick={() => navigate("/")}>
+      <svg
+       xmlns="http://www.w3.org/2000/svg"
+       viewBox="0 0 24 24"
+       fill="currentColor"
+       className="size-10 text-white/30 hover:text-white/40 "
+      >
+       <path
+        fillRule="evenodd"
+        d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-4.28 9.22a.75.75 0 0 0 0 1.06l3 3a.75.75 0 1 0 1.06-1.06l-1.72-1.72h5.69a.75.75 0 0 0 0-1.5h-5.69l1.72-1.72a.75.75 0 0 0-1.06-1.06l-3 3Z"
+        clipRule="evenodd"
+       />
+      </svg>
+     </button>
+    </div>
+    <div className="w-full shadow-lg shadow-sky-700 p-8 text-white/90 h-full col-start-2 sm:col-end-5 xl:col-end-4 flex-col justify-center items-center">
+     <h1 className="text-xl md:text-2xl">{type === "login" ? "Hello Friend" : "Welcome"}</h1>
+     <p className="text-sm text-white/50 sm:mt-4">
       {type === "login" ? "Welcome back, are you having a good day?" : "Are you going to do something today?"}
      </p>
      {children}
      <Navigation type={type} />
      <div className="w-full flex justify-center">
       {type === "login" ? (
-       <p className="mt-5 text-sm text-slate-600">
+       <p className="mt-5 text-sm text-white/50">
         Don't have an account?{" "}
         <Link to="/auth/register" className="text-blue-500 font-semibold">
          Sign Up
         </Link>
        </p>
       ) : (
-       <p className="mt-5 text-sm text-slate-600">
+       <p className="mt-5 text-sm text-white/50">
         Already have an account?{" "}
         <Link to="/auth/login" className="text-blue-500 font-semibold">
          Sign In
@@ -75,9 +89,7 @@ const AuthLayout = (props) => {
       >
        Log out
       </button>
-     ) : 
-      null
-    }
+     ) : null}
     </div>
    </div>
   </div>
