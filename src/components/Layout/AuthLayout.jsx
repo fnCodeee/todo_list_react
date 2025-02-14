@@ -13,7 +13,6 @@ const AuthLayout = (props) => {
     console.log(user.displayName);
     setCurrentUser(user);
    } else {
-    console.log("none");
     setCurrentUser(null);
    }
   });

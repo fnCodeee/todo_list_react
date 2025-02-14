@@ -15,10 +15,11 @@ import {
 } from "firebase/firestore";
 import { auth, db } from "../firebase/firebaseConfig";
 import { CategoryTodo } from "../components/Fragments/CategoryTodo";
-import { FormEdit } from "../components/Fragments/FormEdit";
+// import { FormEdit } from "../components/Fragments/FormEdit";
 import { ModalConfirm } from "../components/Elements/ModalConfirm";
 import { ModalInputTask } from "../components/Elements/ModalInputTask";
 import { onAuthStateChanged, signOut } from "firebase/auth";
+import { Navigate } from "react-router-dom";
 
 export const TodoWrapper = () => {
  const [categories, setCategories] = useState([]);
@@ -36,18 +37,20 @@ export const TodoWrapper = () => {
 
  // Auth Func
  const [user, setUser] = useState(null);
+
  useEffect(() => {
   const unsubscribe = onAuthStateChanged(auth, (user_log) => {
-    if (!user_log) {
-      alert("You need to be logged in!");
-      window.location.href = "/auth/login";
-    } else {
       setUser(user_log);
-    }
   });
 
   return () => unsubscribe();
 }, []);
+if (!user) {
+  return <Navigate to="/auth/login" />;
+}
+
+
+
 useEffect(() => {
   if (user) {
     const fetchCategories = async () => {
